@@ -9,7 +9,7 @@ log = logging.getLogger("application")
 class Application:
 	def __init__(self):
 		self.name = "Lookup"
-		self.version = "0.11"
+		self.version = "0.12"
 		log.debug(f"Starting {self.name} V{self.version}")
 		self.running = False
 		self.wx = wx.App()
