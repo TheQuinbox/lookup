@@ -2,9 +2,10 @@ import wx
 import sys
 import logging
 import bored
-from . import info, dialogs
+from . import info, dialogs, ud
 from PyDictionary import PyDictionary
 import json
+import udpy
 
 log = logging.getLogger("gui.main")
 
@@ -12,7 +13,8 @@ class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.dict = PyDictionary()
-		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word"]
+		self.ud_client = udpy.UrbanClient()
+		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
 		log.debug("Frame created.")
 		self.panel = wx.Panel(self)
@@ -48,6 +50,8 @@ class MainFrame(wx.Frame):
 		if self.combo.GetValue() == self.options[1]:
 			log.debug("Word definer selected.")
 			self.on_define()
+		elif self.combo.GetValue() == self.options[2]:
+			self.on_urban()
 		else:
 			log.debug("Nothing selected.")
 			pass
@@ -63,3 +67,13 @@ class MainFrame(wx.Frame):
 		result = json.dumps(meaning).replace('"], "', "\n\n").replace("{", "").replace("}", "").replace('"', "").replace("[", "").replace("]", "")
 		define_gui = info.InfoGui("Word Definer", "&Definition", result + "\n")
 		define_gui.Show()
+
+	def on_urban(self):
+		term = dialogs.input_box("Term", "Enter the term to search for.")
+		try:
+			defs = self.ud_client.get_definition(term)
+		except UrbanDictionaryError:
+			wx.MessageBox("Invalid query", "Error", wx.ICON_ERROR)
+			return
+		ud_gui = ud.UdGui("Urban Dictionary", defs)
+		ud_gui.Show()
