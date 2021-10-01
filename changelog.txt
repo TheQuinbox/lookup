@@ -1,2 +1,6 @@
+0.12
+Added Urban Dictionary search.
+Users are no longer flutted with debug info.
+
 0.11
 Added word defining.
