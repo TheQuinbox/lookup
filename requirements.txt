@@ -1,3 +1,4 @@
 wxpython
 nuitka
+PyDictionary
 bored

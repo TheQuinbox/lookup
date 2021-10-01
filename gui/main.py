@@ -2,14 +2,17 @@ import wx
 import sys
 import logging
 import bored
-from . import info
+from . import info, dialogs
+from PyDictionary import PyDictionary
+import json
 
 log = logging.getLogger("gui.main")
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
-		self.options = ["Fetch a random activity from the Bored API"]
+		self.dict = PyDictionary()
+		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
 		log.debug("Frame created.")
 		self.panel = wx.Panel(self)
@@ -42,6 +45,9 @@ class MainFrame(wx.Frame):
 		if self.combo.GetValue() == self.options[0]:
 			log.debug("Bored API selected.")
 			self.on_bored()
+		if self.combo.GetValue() == self.options[1]:
+			log.debug("Word definer selected.")
+			self.on_define()
 		else:
 			log.debug("Nothing selected.")
 			pass
@@ -50,3 +56,10 @@ class MainFrame(wx.Frame):
 		activity = bored.getRandomActivity().activity
 		info_gui = info.InfoGui(f"{self.app.name}", "&Activity", activity)
 		info_gui.Show()
+
+	def on_define(self):
+		word = dialogs.input_box("Word", "Enter the word to define.")
+		meaning = self.dict.meaning(word)
+		result = json.dumps(meaning).replace('"], "', "\n\n").replace("{", "").replace("}", "").replace('"', "").replace("[", "").replace("]", "")
+		define_gui = info.InfoGui("Word Definer", "&Definition", result + "\n")
+		define_gui.Show()
