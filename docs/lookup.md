@@ -1,6 +1,4 @@
-# Lookup.
-
-Information at your fingertips.
+# Lookup. Information at your fingertips.
 
 ## Introduction.
 
@@ -14,17 +12,18 @@ Lookup is a fully accessible tool, that puts tons of information just a few key 
 
 ## What can it do?
 
-CUrrently, Look up can:
+Currently, Look up can:
 
 * Fetch random activities from the Bored API.
 * Get forismatic quotes.
+* Get advice slips.
 * Define words.
-* Search Urban DIctionary.
+* Search Urban Dictionary.
 * And more coming soon!
 
 ## Main window.
 
-The main window is fairly simple, only containing a few controls. THey are:
+The main window is fairly simple, only containing a few controls. They are:
 
 * A combo box where you choose what you want to do.
 * A "Go" button. Press this to carry out the selected action.
@@ -35,6 +34,7 @@ The main window is fairly simple, only containing a few controls. THey are:
 ### 0.13
 * Word definer is now displayed much nicer.
 * Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
+* You can now fetch advice slips.
 
 ### 0.12
 * Added Urban Dictionary search.

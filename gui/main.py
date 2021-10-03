@@ -6,13 +6,14 @@ from PyDictionary import PyDictionary
 import udpy
 from keyboard_handler.wx_handler import WXKeyboardHandler
 import requests
+import json
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
 		self.ud_client = udpy.UrbanClient()
-		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote"]
+		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote", "Get an advice slip"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
 		self.handler = WXKeyboardHandler(self)
 		self.handler.register_key(self.app.config.shortcut, self.on_hide)
@@ -46,6 +47,8 @@ class MainFrame(wx.Frame):
 			self.on_urban()
 		elif self.combo.GetValue() == self.options[3]:
 			self.on_quote()
+		elif self.combo.GetValue() == self.options[4]:
+			self.on_advice()
 		else:
 			pass
 
@@ -90,4 +93,12 @@ class MainFrame(wx.Frame):
 		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
 		text = raw.content
 		dlg = info.InfoGui("Forismatic quote", "&quote", text)
+		dlg.Show()
+
+	def on_advice(self):
+		raw = requests.get("https://api.adviceslip.com/advice")
+		raw_Data = raw.content
+		data = json.loads(raw_Data)
+		text = data["slip"]["advice"]
+		dlg = info.InfoGui("Advice slip", "&Advice", text)
 		dlg.Show()
