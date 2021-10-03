@@ -35,6 +35,7 @@ The main window is fairly simple, only containing a few controls. They are:
 * Word definer is now displayed much nicer.
 * Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
 * You can now fetch advice slips.
+* You can now hide and unhide the window.
 
 ### 0.12
 * Added Urban Dictionary search.
