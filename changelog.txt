@@ -1,5 +1,6 @@
 0.13
 Word definer is now displayed much nicer.
+Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
 
 0.12
 Added Urban Dictionary search.
