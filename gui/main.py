@@ -7,13 +7,14 @@ import udpy
 from keyboard_handler.wx_handler import WXKeyboardHandler
 import requests
 import json
+from dadjokes import Dadjoke
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
 		self.ud_client = udpy.UrbanClient()
-		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote", "Get an advice slip"]
+		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote", "Get an advice slip", "Hear a dad joke"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
 		self.handler = WXKeyboardHandler(self)
 		self.handler.register_key(self.app.config.shortcut, self.on_hide)
@@ -49,6 +50,8 @@ class MainFrame(wx.Frame):
 			self.on_quote()
 		elif self.combo.GetValue() == self.options[4]:
 			self.on_advice()
+		elif self.combo.GetValue() == self.options[5]:
+			self.on_joke()
 		else:
 			pass
 
@@ -101,4 +104,10 @@ class MainFrame(wx.Frame):
 		data = json.loads(raw_Data)
 		text = data["slip"]["advice"]
 		dlg = info.InfoGui("Advice slip", "&Advice", text)
+		dlg.Show()
+
+	def on_joke(self):
+		the_joke = Dadjoke()
+		text = the_joke.joke
+		dlg = info.InfoGui("Dad joke", "&Joke", text)
 		dlg.Show()

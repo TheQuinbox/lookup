@@ -19,6 +19,7 @@ Currently, Look up can:
 * Get advice slips.
 * Define words.
 * Search Urban Dictionary.
+* Show you dad jokes.
 * And more coming soon!
 
 ## Main window.
@@ -36,6 +37,7 @@ The main window is fairly simple, only containing a few controls. They are:
 * Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
 * You can now fetch advice slips.
 * You can now hide and unhide the window.
+* Added the ability to fetch dad jokes.
 
 ### 0.12
 * Added Urban Dictionary search.
