@@ -57,7 +57,7 @@ class MainFrame(wx.Frame):
 
 	def on_bored(self):
 		activity = bored.getRandomActivity().activity
-		info_gui = info.InfoGui(f"{self.app.name}", "&Activity", activity)
+		info_gui = info.InfoGui(f"Random activity", "&Activity", activity)
 		info_gui.Show()
 
 	def on_define(self):

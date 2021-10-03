@@ -32,6 +32,9 @@ The main window is fairly simple, only containing a few controls. They are:
 
 ## Changelog.
 
+### 0.21
+* Fixed the title of the Bored API fetcher dialog.
+
 ### 0.20
 * Word definer is now displayed much nicer.
 * Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
