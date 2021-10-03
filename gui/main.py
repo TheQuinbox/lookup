@@ -5,13 +5,14 @@ from . import info, dialogs, ud
 from PyDictionary import PyDictionary
 import udpy
 from keyboard_handler.wx_handler import WXKeyboardHandler
+import requests
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
 		self.ud_client = udpy.UrbanClient()
-		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary"]
+		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
 		self.handler = WXKeyboardHandler(self)
 		self.handler.register_key(self.app.config.shortcut, self.on_hide)
@@ -39,10 +40,12 @@ class MainFrame(wx.Frame):
 	def on_go(self, event=None):
 		if self.combo.GetValue() == self.options[0]:
 			self.on_bored()
-		if self.combo.GetValue() == self.options[1]:
+		elif self.combo.GetValue() == self.options[1]:
 			self.on_define()
 		elif self.combo.GetValue() == self.options[2]:
 			self.on_urban()
+		elif self.combo.GetValue() == self.options[3]:
+			self.on_quote()
 		else:
 			pass
 
@@ -82,3 +85,9 @@ class MainFrame(wx.Frame):
 		else:
 			self.hidden = True
 			self.Hide()
+
+	def on_quote(self):
+		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
+		text = raw.content
+		dlg = info.InfoGui("Forismatic quote", "&quote", text)
+		dlg.Show()
