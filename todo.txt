@@ -4,7 +4,7 @@ Add dad jokes.
 Add weather.
 Add wikipedia.
 Add a calculator.
-Way update the parsing of the word definitions.
 Add sound and speech feedback for hiding/unhiding the window, and for exiting.
 Make alt+f4 not close the app, just hide it.
 Add a sys tray icon.
+Make word definition parsing slightly nicer, for example, blank lines in a few more places, and capitalize the definitions, and append a period.

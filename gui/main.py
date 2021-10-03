@@ -11,7 +11,6 @@ class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
-		self.dict = PyDictionary()
 		self.ud_client = udpy.UrbanClient()
 		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
@@ -55,9 +54,16 @@ class MainFrame(wx.Frame):
 
 	def on_define(self):
 		word = dialogs.input_box("Word", "Enter the word to define.")
-		meaning = self.dict.meaning(word)
-		result = json.dumps(meaning).replace('"], "', "\n\n").replace("{", "").replace("}", "").replace('"', "").replace("[", "").replace("]", "")
-		define_gui = info.InfoGui("Word Definer", "&Definition", result + "\n")
+		definition = ""
+		dict = PyDictionary(word)
+		temp = dict.getMeanings()
+		for key in temp.keys():
+			definition += f"{key.capitalize()}:\n"
+			for k in temp[key].keys():
+				definition += f"{k}:\n"
+				for m in temp[key][k]:
+					definition += f"{m}\n"
+		define_gui = info.InfoGui("Word Definer", "&Definition", f"{definition}")
 		define_gui.Show()
 
 	def on_urban(self):
