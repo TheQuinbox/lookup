@@ -4,7 +4,6 @@ Add weather.
 Add wikipedia.
 Add a calculator.
 Add sound and speech feedback for hiding/unhiding the window, and for exiting.
-Make alt+f4 not close the app, just hide it.
 Add a sys tray icon.
 Add changelog to docs
 Add much more to docs
