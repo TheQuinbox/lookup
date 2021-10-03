@@ -1,0 +1,10 @@
+Add forismatic quote fetching.
+Add advice slip fetching.
+Add dad jokes.
+Add weather.
+Add wikipedia.
+Add a calculator.
+Way update the parsing of the word definitions.
+Add sound and speech feedback for hiding/unhiding the window, and for exiting.
+Make alt+f4 not close the app, just hide it.
+Add a sys tray icon.

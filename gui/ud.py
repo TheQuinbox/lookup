@@ -24,7 +24,6 @@ class UdGui(wx.Dialog):
 		self.Bind(wx.EVT_CLOSE, self.on_close)
 		self.list.Bind(wx.EVT_LISTBOX, self.on_list_change)
 		self.close.Bind(wx.EVT_BUTTON, self.on_close)
-		log.debug("Events bound.")
 		self.panel.Layout()
 
 	def on_close(self, event=None):

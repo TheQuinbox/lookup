@@ -5,14 +5,18 @@ from . import info, dialogs, ud
 from PyDictionary import PyDictionary
 import json
 import udpy
+from keyboard_handler.wx_handler import WXKeyboardHandler
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
+		self.hidden = False
 		self.dict = PyDictionary()
 		self.ud_client = udpy.UrbanClient()
 		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
+		self.handler = WXKeyboardHandler(self)
+		self.handler.register_key(self.app.config.shortcut, self.on_hide)
 		self.panel = wx.Panel(self)
 		self.main_box = wx.BoxSizer(wx.VERTICAL)
 		self.label = wx.StaticText(self.panel, label="&Select what you want to do", style=wx.ALIGN_CENTRE)
@@ -65,3 +69,11 @@ class MainFrame(wx.Frame):
 			return
 		ud_gui = ud.UdGui("Urban Dictionary", defs)
 		ud_gui.Show()
+
+	def on_hide(self):
+		if self.hidden:
+			self.hidden = False
+			self.Show()
+		else:
+			self.hidden = True
+			self.Hide()
