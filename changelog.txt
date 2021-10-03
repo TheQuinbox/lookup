@@ -1,3 +1,6 @@
+0.13
+Word definer is now displayed much nicer.
+
 0.12
 Added Urban Dictionary search.
 Users are no longer flutted with debug info.

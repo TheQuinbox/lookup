@@ -6,7 +6,7 @@ import os
 class Application:
 	def __init__(self):
 		self.name = "Lookup"
-		self.version = "0.12"
+		self.version = "0.13"
 		self.running = False
 		self.config = None
 		self.load_config()
