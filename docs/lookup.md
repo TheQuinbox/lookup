@@ -29,3 +29,16 @@ The main window is fairly simple, only containing a few controls. THey are:
 * A combo box where you choose what you want to do.
 * A "Go" button. Press this to carry out the selected action.
 * The "Close" button. Use this to exit the application. It's worth noting this is the only way to exit, alt+f4 hides the window.
+
+## Changelog.
+
+### 0.13
+* Word definer is now displayed much nicer.
+* Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
+
+### 0.12
+* Added Urban Dictionary search.
+* Users are no longer flutted with debug info.
+
+### 0.11
+* Added word defining.

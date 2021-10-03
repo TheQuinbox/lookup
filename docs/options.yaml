@@ -6,5 +6,5 @@ standalone: true
 top-level-division: chapter
 table-of-contents: true
 toc-depth: 3
-number-sections: true
+number-sections: false
 shift-heading-level-by: -1
