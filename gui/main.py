@@ -60,9 +60,9 @@ class MainFrame(wx.Frame):
 		for key in temp.keys():
 			definition += f"{key.capitalize()}:\n"
 			for k in temp[key].keys():
-				definition += f"{k}:\n"
+				definition += f"{k.capitalize()}:\n"
 				for m in temp[key][k]:
-					definition += f"{m}\n"
+					definition += f"{m.capitalize()}.\n"
 		define_gui = info.InfoGui("Word Definer", "&Definition", f"{definition}")
 		define_gui.Show()
 
