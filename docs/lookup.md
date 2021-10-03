@@ -31,7 +31,7 @@ The main window is fairly simple, only containing a few controls. They are:
 
 ## Changelog.
 
-### 0.13
+### 0.20
 * Word definer is now displayed much nicer.
 * Pressing Alt+f4 now hides the window, doesn't exit. To exit, use the close button.
 * You can now fetch advice slips.
