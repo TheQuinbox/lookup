@@ -3,7 +3,6 @@ import sys
 import bored
 from . import info, dialogs, ud
 from PyDictionary import PyDictionary
-import json
 import udpy
 from keyboard_handler.wx_handler import WXKeyboardHandler
 
