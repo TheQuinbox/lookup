@@ -29,7 +29,7 @@ class MainFrame(wx.Frame):
 		self.close = wx.Button(self.panel, wx.ID_CANCEL, "E&xit")
 		self.main_box.Add(self.close, 0, wx.ALL, 10)
 		self.go.Bind(wx.EVT_BUTTON, self.on_go)
-		self.Bind(wx.EVT_CLOSE, self.on_close)
+		self.Bind(wx.EVT_CLOSE, self.on_hide)
 		self.close.Bind(wx.EVT_BUTTON, self.on_close)
 		self.panel.Layout()
 
@@ -78,7 +78,7 @@ class MainFrame(wx.Frame):
 		ud_gui = ud.UdGui("Urban Dictionary", defs)
 		ud_gui.Show()
 
-	def on_hide(self):
+	def on_hide(self, event=None):
 		if self.hidden:
 			self.hidden = False
 			self.Show()
