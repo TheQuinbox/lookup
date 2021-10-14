@@ -62,6 +62,9 @@ class MainFrame(wx.Frame):
 
 	def on_define(self):
 		word = dialogs.input_box("Word", "Enter the word to define.")
+		if word == "":
+			wx.MessageBox("You have to enter a word.", "Error", wx.ICON_ERROR)
+			return
 		definition = ""
 		dict = PyDictionary(word)
 		try:
