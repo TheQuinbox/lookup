@@ -5,3 +5,5 @@ Add sound and speech feedback for hiding/unhiding the window, and for exiting.
 Add a sys tray icon.
 Add much more to docs
 Add twishort
+Add a spell checker.
+Add Synonyms and antonyms (but PyDictionary seems to be broken when it comes to this).
