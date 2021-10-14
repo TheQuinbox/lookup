@@ -36,9 +36,6 @@ The main window is fairly simple, only containing a few controls. They are:
 
 * You're now alerted if the word definer found no definitions.
 * You can no longer enter blank words in the word definer dialog.
-
-### 0.21
-
 * Fixed the title of the Bored API fetcher dialog.
 
 ### 0.20
