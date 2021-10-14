@@ -7,4 +7,3 @@ Add much more to docs
 Add twishort
 Add a spell checker.
 Add Synonyms and antonyms (but PyDictionary seems to be broken when it comes to this).
-Make it impossible to enter a blank word in the word definer.
