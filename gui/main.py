@@ -64,15 +64,18 @@ class MainFrame(wx.Frame):
 		word = dialogs.input_box("Word", "Enter the word to define.")
 		definition = ""
 		dict = PyDictionary(word)
-		temp = dict.getMeanings()
-		for key in temp.keys():
-			definition += f"{key.capitalize()}:\n"
-			for k in temp[key].keys():
-				definition += f"{k.capitalize()}:\n"
-				for m in temp[key][k]:
-					definition += f"{m.capitalize()}.\n"
-		define_gui = info.InfoGui("Word Definer", "&Definition", f"{definition}")
-		define_gui.Show()
+		try:
+			temp = dict.getMeanings()
+			for key in temp.keys():
+				definition += f"{key.capitalize()}:\n"
+				for k in temp[key].keys():
+					definition += f"{k.capitalize()}:\n"
+					for m in temp[key][k]:
+						definition += f"{m.capitalize()}.\n"
+			define_gui = info.InfoGui("Word Definer", "&Definition", f"{definition}")
+			define_gui.Show()
+		except AttributeError:
+			wx.MessageBox("Word not found!", "Error", wx.ICON_ERROR)
 
 	def on_urban(self):
 		term = dialogs.input_box("Term", "Enter the term to search for.")
