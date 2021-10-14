@@ -1,6 +1,6 @@
 from: markdown
 to: html5
-input-file: lookup.md
+input-file: readme.md
 output-file: documentation.html
 standalone: true
 top-level-division: chapter
