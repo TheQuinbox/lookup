@@ -28,13 +28,14 @@ The main window is fairly simple, only containing a few controls. They are:
 
 * A combo box where you choose what you want to do.
 * A "Go" button. Press this to carry out the selected action.
-* The "Close" button. Use this to exit the application. It's worth noting this is the only way to exit, alt+f4 hides the window.
+* A "Close" button. Use this to exit the application. It's worth noting this is the only way to exit, alt+f4 hides the window.
 
 ## Changelog.
 
 ### 0.22.
 
 * You're now alerted if the word definer found no definitions.
+* You can no longer enter blank words in the word definer dialog.
 
 ### 0.21
 
