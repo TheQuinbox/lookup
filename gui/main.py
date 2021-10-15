@@ -82,13 +82,21 @@ class MainFrame(wx.Frame):
 		else:
 			pass
 
+	def on_hide(self, event=None):
+		if self.hidden:
+			self.hidden = False
+			self.Show()
+		else:
+			self.hidden = True
+			self.Hide()
+
 	def on_bored(self):
 		activity = bored.getRandomActivity().activity
-		info_gui = info.InfoGui(f"Random activity", "&Activity", activity)
-		info_gui.Show()
+		self.result.SetValue(activity)
+		self.result.SetFocus()
 
 	def on_define(self):
-		word = dialogs.input_box("Word", "Enter the word to define.")
+		word = self.entry.GetValue()
 		if word == "":
 			wx.MessageBox("You have to enter a word.", "Error", wx.ICON_ERROR)
 			return
@@ -102,45 +110,37 @@ class MainFrame(wx.Frame):
 					definition += f"{k.capitalize()}:\n"
 					for m in temp[key][k]:
 						definition += f"{m.capitalize()}.\n"
-			define_gui = info.InfoGui("Word Definer", "&Definition", f"{definition}")
-			define_gui.Show()
+			self.result.SetValue(definition)
+			self.result.SetFocus()
 		except AttributeError:
 			wx.MessageBox("Word not found!", "Error", wx.ICON_ERROR)
 
 	def on_urban(self):
-		term = dialogs.input_box("Term", "Enter the term to search for.")
+		term = self.entry.GetValue()
 		try:
 			defs = self.ud_client.get_definition(term)
 		except UrbanDictionaryError:
 			wx.MessageBox("Invalid query", "Error", wx.ICON_ERROR)
 			return
-		ud_gui = ud.UdGui("Urban Dictionary", defs)
-		ud_gui.Show()
-
-	def on_hide(self, event=None):
-		if self.hidden:
-			self.hidden = False
-			self.Show()
-		else:
-			self.hidden = True
-			self.Hide()
+		self.results.SetValue("".join(defs))
+		self.results.SetFocus()
 
 	def on_quote(self):
 		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
 		text = raw.content
-		dlg = info.InfoGui("Forismatic quote", "&quote", text)
-		dlg.Show()
+		self.result.SetValue(text)
+		self.result.SetFocus()
 
 	def on_advice(self):
 		raw = requests.get("https://api.adviceslip.com/advice")
 		raw_Data = raw.content
 		data = json.loads(raw_Data)
 		text = data["slip"]["advice"]
-		dlg = info.InfoGui("Advice slip", "&Advice", text)
-		dlg.Show()
+		self.result.SetValue(text)
+		self.result.SetFocus()
 
 	def on_joke(self):
 		the_joke = Dadjoke()
 		text = the_joke.joke
-		dlg = info.InfoGui("Dad joke", "&Joke", text)
-		dlg.Show()
+		self.result.SetValue(text)
+		self.result.SetFocus()
