@@ -52,8 +52,10 @@ class MainFrame(wx.Frame):
 		if self.combo.GetValue() == self.options[0]:
 			self.entry.Hide()
 		elif self.combo.GetValue() == self.options[1]:
+			self.entry_label.SetLabel("&Word")
 			self.entry.Show()
 		elif self.combo.GetValue() == self.options[2]:
+			self.entry_label.SetLabel("&Term")
 			self.entry.Show()
 		elif self.combo.GetValue() == self.options[3]:
 			self.entry.Hide()
