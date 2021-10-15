@@ -32,6 +32,10 @@ The main window is fairly simple, only containing a few controls. They are:
 
 ## Changelog.
 
+### 0.30.
+
+* Completely re-designed the interface! No more dialogs for everything!
+
 ### 0.22.
 
 * You're now alerted if the word definer found no definitions.
