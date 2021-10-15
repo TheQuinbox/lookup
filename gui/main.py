@@ -49,7 +49,6 @@ class MainFrame(wx.Frame):
 		sys.exit()
 
 	def on_combo_change(self, event=None):
-		self.entry.SetValue("")
 		if self.combo.GetValue() == self.options[0]:
 			self.entry.Hide()
 		elif self.combo.GetValue() == self.options[1]:
@@ -68,7 +67,6 @@ class MainFrame(wx.Frame):
 			pass
 
 	def on_go(self, event=None):
-		self.entry.SetValue("")
 		if self.combo.GetValue() == self.options[0]:
 			self.on_bored()
 		elif self.combo.GetValue() == self.options[1]:
