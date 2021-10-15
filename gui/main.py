@@ -1,7 +1,6 @@
 import wx
 import sys
 import bored
-from . import info, dialogs, ud
 from PyDictionary import PyDictionary
 import udpy
 from keyboard_handler.wx_handler import WXKeyboardHandler
@@ -20,8 +19,8 @@ class MainFrame(wx.Frame):
 		self.handler.register_key(self.app.config.shortcut, self.on_hide)
 		self.panel = wx.Panel(self)
 		self.main_box = wx.BoxSizer(wx.VERTICAL)
-		self.label = wx.StaticText(self.panel, label="&Select what you want to do", style=wx.ALIGN_CENTRE)
-		self.main_box.Add(self.label, 0, wx.EXPAND | wx.ALL, 5)
+		self.combo_label = wx.StaticText(self.panel, label="&Select what you want to do", style=wx.ALIGN_CENTRE)
+		self.main_box.Add(self.combo_label, 0, wx.EXPAND | wx.ALL, 5)
 		self.combo = wx.ComboBox(self.panel, choices=self.options, style=wx.CB_SORT | wx.CB_READONLY)
 		self.main_box.Add(self.combo, 1, wx.EXPAND | wx.ALL, 5)
 		self.combo.SetSelection(0)
