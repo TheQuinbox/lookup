@@ -117,13 +117,17 @@ class MainFrame(wx.Frame):
 
 	def on_urban(self):
 		term = self.entry.GetValue()
+		text = ""
 		try:
 			defs = self.ud_client.get_definition(term)
 		except UrbanDictionaryError:
 			wx.MessageBox("Invalid query", "Error", wx.ICON_ERROR)
 			return
-		self.results.SetValue("".join(defs))
-		self.results.SetFocus()
+		text += term + "\n"
+		for i in defs:
+			text += i.definition + "\n\n"
+		self.result.SetValue(text)
+		self.result.SetFocus()
 
 	def on_quote(self):
 		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
