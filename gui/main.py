@@ -22,6 +22,7 @@ class MainFrame(wx.Frame):
 		self.combo_label = wx.StaticText(self.panel, label="&Select what you want to do", style=wx.ALIGN_CENTRE)
 		self.main_box.Add(self.combo_label, 0, wx.EXPAND | wx.ALL, 5)
 		self.combo = wx.ComboBox(self.panel, choices=self.options, style=wx.CB_SORT | wx.CB_READONLY)
+		self.combo.Bind(wx.EVT_COMBOBOX, self.on_combo_change)
 		self.main_box.Add(self.combo, 1, wx.EXPAND | wx.ALL, 5)
 		self.combo.SetSelection(0)
 		self.entry_label = wx.StaticText(self.panel, label="&Entry", style=wx.ALIGN_CENTRE)
@@ -40,11 +41,28 @@ class MainFrame(wx.Frame):
 		self.go.Bind(wx.EVT_BUTTON, self.on_go)
 		self.Bind(wx.EVT_CLOSE, self.on_hide)
 		self.close.Bind(wx.EVT_BUTTON, self.on_close)
+		self.on_combo_change()
 		self.panel.Layout()
 
 	def on_close(self, event=None):
 		self.Destroy()
 		sys.exit()
+
+	def on_combo_change(self, event=None):
+		if self.combo.GetValue() == self.options[0]:
+			self.entry.Hide()
+		elif self.combo.GetValue() == self.options[1]:
+			self.entry.Show()
+		elif self.combo.GetValue() == self.options[2]:
+			self.entry.Show()
+		elif self.combo.GetValue() == self.options[3]:
+			self.entry.Hide()
+		elif self.combo.GetValue() == self.options[4]:
+			self.entry.Hide()
+		elif self.combo.GetValue() == self.options[5]:
+			self.entry.Hide()
+		else:
+			pass
 
 	def on_go(self, event=None):
 		if self.combo.GetValue() == self.options[0]:
