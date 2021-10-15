@@ -9,3 +9,4 @@ Add Synonyms and antonyms (but PyDictionary seems to be broken when it comes to 
 Completely redo the interface, so we don't have to pop up a million dialogs.
 Speak for error messages, don't show a dialog.
 Add sounds.
+Make everything get pulled in a thread, to stop application hanging.
