@@ -5,3 +5,4 @@ bored
 requests
 git+https://www.github.com/accessibleapps/keyboard_handler
 dadjokes
+git+https://www.github.com/accessibleapps/sound_lib
