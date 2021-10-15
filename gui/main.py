@@ -7,11 +7,13 @@ from keyboard_handler.wx_handler import WXKeyboardHandler
 import requests
 import json
 from dadjokes import Dadjoke
+import threading
 
 class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
+		self.text= ""
 		self.ud_client = udpy.UrbanClient()
 		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote", "Get an advice slip", "Hear a dad joke"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
@@ -68,19 +70,24 @@ class MainFrame(wx.Frame):
 
 	def on_go(self, event=None):
 		if self.combo.GetValue() == self.options[0]:
-			self.on_bored()
+			threading.Thread(target=self.on_bored).start()
 		elif self.combo.GetValue() == self.options[1]:
-			self.on_define()
+			threading.Thread(target=self.on_define).start()
 		elif self.combo.GetValue() == self.options[2]:
-			self.on_urban()
+			threading.Thread(target=self.on_urban).start()
 		elif self.combo.GetValue() == self.options[3]:
-			self.on_quote()
+			threading.Thread(target=self.on_quote).start()
 		elif self.combo.GetValue() == self.options[4]:
-			self.on_advice()
+			threading.Thread(target=self.on_advice).start()
 		elif self.combo.GetValue() == self.options[5]:
-			self.on_joke()
+			threading.Thread(target=self.on_joke).start()
 		else:
 			pass
+		wx.CallAfter(self.set_text_field)
+
+	def set_text_field(self):
+		self.result.SetValue(self.text)
+		self.result.SetFocus()
 
 	def on_hide(self, event=None):
 		if self.hidden:
@@ -92,8 +99,7 @@ class MainFrame(wx.Frame):
 
 	def on_bored(self):
 		activity = bored.getRandomActivity().activity
-		self.result.SetValue(activity)
-		self.result.SetFocus()
+		self.text = activity
 
 	def on_define(self):
 		word = self.entry.GetValue()
@@ -110,8 +116,7 @@ class MainFrame(wx.Frame):
 					definition += f"{k.capitalize()}:\n"
 					for m in temp[key][k]:
 						definition += f"{m.capitalize()}.\n"
-			self.result.SetValue(definition)
-			self.result.SetFocus()
+			self.text = definition
 		except AttributeError:
 			wx.MessageBox("Word not found!", "Error", wx.ICON_ERROR)
 
@@ -126,25 +131,21 @@ class MainFrame(wx.Frame):
 		text += term + "\n"
 		for i in defs:
 			text += i.definition + "\n\n"
-		self.result.SetValue(text)
-		self.result.SetFocus()
+		self.text = text
 
 	def on_quote(self):
 		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
 		text = raw.content
-		self.result.SetValue(text)
-		self.result.SetFocus()
+		self.text = text
 
 	def on_advice(self):
 		raw = requests.get("https://api.adviceslip.com/advice")
 		raw_Data = raw.content
 		data = json.loads(raw_Data)
 		text = data["slip"]["advice"]
-		self.result.SetValue(text)
-		self.result.SetFocus()
+		self.text = text
 
 	def on_joke(self):
 		the_joke = Dadjoke()
 		text = the_joke.joke
-		self.result.SetValue(text)
-		self.result.SetFocus()
+		self.text = text
