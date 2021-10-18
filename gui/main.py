@@ -13,7 +13,6 @@ class MainFrame(wx.Frame):
 	def __init__(self, app):
 		self.app = app
 		self.hidden = False
-		self.text= ""
 		self.ud_client = udpy.UrbanClient()
 		self.options = ["Fetch a random activity from the Bored API", "Get the definition of a word", "Search Urban Dictionary", "Get a forismatic quote", "Get an advice slip", "Hear a dad joke"]
 		wx.Frame.__init__(self, None, title=f"{self.app.name} V{self.app.version}", size=wx.DefaultSize)
@@ -83,10 +82,9 @@ class MainFrame(wx.Frame):
 			threading.Thread(target=self.on_joke).start()
 		else:
 			pass
-		wx.CallAfter(self.set_text_field)
 
-	def set_text_field(self):
-		self.result.SetValue(self.text)
+	def set_text_field(self, text):
+		self.result.SetValue(text)
 		self.result.SetFocus()
 
 	def on_hide(self, event=None):
@@ -99,7 +97,7 @@ class MainFrame(wx.Frame):
 
 	def on_bored(self):
 		activity = bored.getRandomActivity().activity
-		self.text = activity
+		wx.CallAfter(self.set_text_field, activity)
 
 	def on_define(self):
 		word = self.entry.GetValue()
@@ -116,9 +114,10 @@ class MainFrame(wx.Frame):
 					definition += f"{k.capitalize()}:\n"
 					for m in temp[key][k]:
 						definition += f"{m.capitalize()}.\n"
-			self.text = definition
 		except AttributeError:
 			wx.MessageBox("Word not found!", "Error", wx.ICON_ERROR)
+			return
+		wx.CallAfter(self.set_text_field, definition)
 
 	def on_urban(self):
 		term = self.entry.GetValue()
@@ -131,21 +130,21 @@ class MainFrame(wx.Frame):
 		text += term + "\n"
 		for i in defs:
 			text += i.definition + "\n\n"
-		self.text = text
+		wx.CallAfter(self.set_text_field, text)
 
 	def on_quote(self):
 		raw = requests.get("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=text")
 		text = raw.content
-		self.text = text
+		wx.CallAfter(self.set_text_field, text)
 
 	def on_advice(self):
 		raw = requests.get("https://api.adviceslip.com/advice")
 		raw_Data = raw.content
 		data = json.loads(raw_Data)
 		text = data["slip"]["advice"]
-		self.text = text
+		wx.CallAfter(self.set_text_field, text)
 
 	def on_joke(self):
 		the_joke = Dadjoke()
 		text = the_joke.joke
-		self.text = text
+		wx.CallAfter(self.set_text_field, text)
