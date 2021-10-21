@@ -24,11 +24,13 @@ Currently, Look up can:
 
 ## Main window.
 
-The main window is fairly simple, only containing a few controls. They are:
+The main window is fairly simple. It contains the following items:
 
-* A combo box where you choose what you want to do.
-* A "Go" button. Press this to carry out the selected action.
-* A "Close" button. Use this to exit the application. It's worth noting this is the only way to exit, alt+f4 hides the window.
+* A combo box to select what you want to do.
+* A text field (if the currently selected option needs one).
+* A go button.
+* The field where your results go.
+* The exit button. It's worth noting that this is the only way to exit the application (pressing alt+f4 hides the window).
 
 ## Changelog.
 
