@@ -1,7 +1,1 @@
 wxpython
-nuitka
-PyDictionary
-bored
-requests
-git+https://www.github.com/accessibleapps/keyboard_handler
-dadjokes
