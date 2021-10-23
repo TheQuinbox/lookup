@@ -1,1 +1,3 @@
+Make the go button actually call get_Text.
+Make the plugins able to create their own UIs
 Add a plugin system. Make it basic at first, just have a method to get text from the API. Later though, allow it to set it's own panel of UI controls and stuff.
