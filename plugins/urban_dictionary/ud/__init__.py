@@ -3,9 +3,6 @@ from . import api
 import wx
 
 class UrbanDictionaryPlugin(plugin_handler.Plugin):
-	def __init__(self):
-		super().__init__()
-
 	def get_text(self):
 		final = ""
 		results = api.get_definition("Quin")
