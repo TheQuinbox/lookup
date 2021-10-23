@@ -32,4 +32,8 @@ def get_definition(term):
 
 class UrbanDictionaryPlugin(plugin_handler.Plugin):
 	def get_text(self):
-		return get_definition("Quin")
+		final = ""
+		results = get_definition("Quin")
+		for i in results:
+			final += i.to_string()
+		return final

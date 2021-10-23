@@ -20,7 +20,7 @@ class MainFrame(wx.Frame):
 		self.main_box.Add(self.go_button, 0, wx.ALL, 10)
 		self.result_label = wx.StaticText(self.panel, -1, "&Result")
 		self.main_box.Add(self.result_label, 0, wx.ALL, 10)
-		self.result = wx.TextCtrl(self.panel, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY)
+		self.result = wx.TextCtrl(self.panel, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY, size=(600, 600))
 		self.main_box.Add(self.result, 0, wx.ALL, 10)
 		self.exit_button = wx.Button(self.panel, -1, "E&xit")
 		self.exit_button.Bind(wx.EVT_BUTTON, self.on_exit)
@@ -33,11 +33,8 @@ class MainFrame(wx.Frame):
 	def on_go(self, event=None):
 		if self.list.IsEmpty():
 			return
-		results = list(self.plugins)[self.list.GetSelection()].plugin_object.get_text()
-		text = ""
-		for i in results:
-			text += i.to_string()
-		wx.CallAfter(self.result.SetValue(text))
+		text = list(self.plugins)[self.list.GetSelection()].plugin_object.get_text()
+		wx.CallAfter(self.set_result(text))
 
 	def on_exit(self, event=None):
 		self.Destroy()
@@ -52,3 +49,7 @@ class MainFrame(wx.Frame):
 		self.list.Clear()
 		for plugin_info, plugin_object in self.plugins.items():
 			self.list.Append(plugin_info.name, plugin_object)
+
+	def set_result(self, text):
+		self.result.SetValue(text)
+		self.result.SetFocus()
