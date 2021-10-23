@@ -19,6 +19,7 @@ class MainFrame(wx.Frame):
 		self.load_plugins()
 		if not self.list.IsEmpty():
 			self.list.SetSelection(0)
+			self.on_list_change()
 		self.exit_button = wx.Button(self.panel, -1, "E&xit")
 		self.exit_button.Bind(wx.EVT_BUTTON, self.on_exit)
 		self.main_box.Add(self.exit_button, 0, wx.ALL, 10)
