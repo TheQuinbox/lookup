@@ -1,5 +1,6 @@
 import wx
 import plugin_handler
+import sys
 
 class MainFrame(wx.Frame):
 	def __init__(self):
