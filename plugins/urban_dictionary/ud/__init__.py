@@ -11,12 +11,16 @@ class UrbanDictionaryPlugin(plugin_handler.Plugin):
 		return final
 
 	def create_panel(self, frame):
-		panel = wx.Panel(frame)
-		sizer = wx.BoxSizer(wx.VERTICAL)
-		search_button = wx.Button(panel, -1, "&Search")
-		search_button.Bind(wx.EVT_BUTTON, self.on_search)
-		sizer.Add(search_button, 0, wx.ALL, 10)
-		return panel
+		panel = UrbanDictionaryPanel(frame)
+		frame.plugin_panel = panel
 
 	def on_search(self, event=None):
 		pass
+
+class UrbanDictionaryPanel(wx.Panel):
+	def __init__(self, parent):
+		self.parent = parent
+		wx.Panel.__init__(self.parent)
+		self.sizer = wx.BoxSizer(wx.HORIZONTAL)
+		self.search_button = wx.Button(self, -1, "&Search")
+		self.sizer.Add(self.search_button, 0, wx.All, 10)
