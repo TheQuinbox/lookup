@@ -5,7 +5,7 @@ class Plugin(IPlugin):
 	def get_text(self):
 		pass
 
-	def create_panel(self):
+	def create_panel(self, frame):
 		pass
 
 def get_plugin_manager():
