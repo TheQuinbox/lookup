@@ -31,7 +31,13 @@ class MainFrame(wx.Frame):
 			self.list.SetSelection(0)
 
 	def on_go(self, event=None):
-		pass
+		if self.list.IsEmpty():
+			return
+		results = list(self.plugins)[self.list.GetSelection()].plugin_object.get_text()
+		text = ""
+		for i in results:
+			text += i.to_string()
+		wx.CallAfter(self.result.SetValue(text))
 
 	def on_exit(self, event=None):
 		self.Destroy()
