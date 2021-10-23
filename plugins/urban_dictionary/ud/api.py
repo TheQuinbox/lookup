@@ -1,4 +1,3 @@
-import plugin_handler
 import requests
 
 URL = "http://api.urbandictionary.com/v0/define"
@@ -30,10 +29,3 @@ def get_definition(term):
 		raise UrbanDictionaryError(f"Error parsing result: {e}")
 	return res
 
-class UrbanDictionaryPlugin(plugin_handler.Plugin):
-	def get_text(self):
-		final = ""
-		results = get_definition("Quin")
-		for i in results:
-			final += i.to_string()
-		return final
