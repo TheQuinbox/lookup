@@ -1,2 +1,1 @@
-Make the go button actually call get_Text.
 Make the plugins able to create their own UIs
