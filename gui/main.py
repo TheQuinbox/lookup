@@ -5,6 +5,7 @@ import sys
 class MainFrame(wx.Frame):
 	def __init__(self):
 		self.manager = None
+		self.plugins = {}
 		wx.Dialog.__init__(self, None, title="Lookup", size=wx.DefaultSize)
 		self.panel = wx.Panel(self)
 		self.main_box = wx.BoxSizer(wx.VERTICAL)
@@ -39,3 +40,7 @@ class MainFrame(wx.Frame):
 		self.manager.collectPlugins()
 		for plugin in self.manager.getAllPlugins():
 			self.manager.activatePluginByName(plugin.name)
+			self.plugins[plugin] = plugin.plugin_object
+		self.list.Clear()
+		for plugin_info, plugin_object in self.plugins.items():
+			self.list.Append(plugin_info.name, plugin_object)
