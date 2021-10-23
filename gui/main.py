@@ -14,27 +14,22 @@ class MainFrame(wx.Frame):
 		self.list = wx.ListBox(self.panel, -1)
 		self.main_box.Add(self.list, 0, wx.ALL, 10)
 		self.list.SetFocus()
-		self.go_button = wx.Button(self.panel, -1, "&Go")
-		self.go_button.SetDefault()
-		self.go_button.Bind(wx.EVT_BUTTON, self.on_go)
-		self.main_box.Add(self.go_button, 0, wx.ALL, 10)
-		self.result_label = wx.StaticText(self.panel, -1, "&Result")
-		self.main_box.Add(self.result_label, 0, wx.ALL, 10)
-		self.result = wx.TextCtrl(self.panel, -1, "", style=wx.TE_MULTILINE | wx.TE_READONLY, size=(600, 600))
-		self.main_box.Add(self.result, 0, wx.ALL, 10)
+		self.list.Bind(wx.EVT_LISTCHANGE, self.on_list_change)
+		self.plugin_panel = wx.Panel(self)
+		self.load_plugins()
+		if not self.list.IsEmpty():
+			self.list.SetSelection(0)
 		self.exit_button = wx.Button(self.panel, -1, "E&xit")
 		self.exit_button.Bind(wx.EVT_BUTTON, self.on_exit)
 		self.main_box.Add(self.exit_button, 0, wx.ALL, 10)
 		self.panel.Layout()
-		self.load_plugins()
-		if not self.list.IsEmpty():
-			self.list.SetSelection(0)
 
 	def on_go(self, event=None):
 		if self.list.IsEmpty():
 			return
-		text = list(self.plugins)[self.list.GetSelection()].plugin_object.get_text()
-		wx.CallAfter(self.set_result(text))
+
+	def on_list_change(self, event=None):
+		self.result_panel = list(self.plugins)[self.list.GetSelection()].plugin_object.create_panel()
 
 	def on_exit(self, event=None):
 		self.Destroy()
@@ -49,7 +44,3 @@ class MainFrame(wx.Frame):
 		self.list.Clear()
 		for plugin_info, plugin_object in self.plugins.items():
 			self.list.Append(plugin_info.name, plugin_object)
-
-	def set_result(self, text):
-		self.result.SetValue(text)
-		self.result.SetFocus()
