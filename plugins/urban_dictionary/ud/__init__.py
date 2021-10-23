@@ -19,8 +19,9 @@ class UrbanDictionaryPlugin(plugin_handler.Plugin):
 
 class UrbanDictionaryPanel(wx.Panel):
 	def __init__(self, parent):
-		self.parent = parent
-		wx.Panel.__init__(self.parent)
+		wx.Panel.__init__(self, parent)
 		self.sizer = wx.BoxSizer(wx.HORIZONTAL)
 		self.search_button = wx.Button(self, -1, "&Search")
 		self.sizer.Add(self.search_button, 0, wx.All, 10)
+		self.SetSizer(self.sizer)
+		self.Layout()

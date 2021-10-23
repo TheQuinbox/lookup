@@ -15,7 +15,7 @@ class MainFrame(wx.Frame):
 		self.main_box.Add(self.list, 0, wx.ALL, 10)
 		self.list.SetFocus()
 		self.list.Bind(wx.EVT_LISTBOX, self.on_list_change)
-		self.plugin_panel = None
+		self.plugin_panel = wx.Panel(self)
 		self.load_plugins()
 		if not self.list.IsEmpty():
 			self.list.SetSelection(0)
@@ -30,8 +30,9 @@ class MainFrame(wx.Frame):
 
 	def on_list_change(self, event=None):
 		result = list(self.plugins)[self.list.GetSelection()].plugin_object.create_panel(self)
-		self.plugin_panel = None
+		self.plugin_panel.Hide()
 		self.plugin_panel = result
+		self.plugin_panel.Show()
 
 	def on_exit(self, event=None):
 		self.Destroy()
