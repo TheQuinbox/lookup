@@ -27,6 +27,8 @@ class MainFrame(wx.Frame):
 		self.main_box.Add(self.exit_button, 0, wx.ALL, 10)
 		self.panel.Layout()
 		self.load_plugins()
+		if not self.list.IsEmpty():
+			self.list.SetSelection(0)
 
 	def on_go(self, event=None):
 		pass
