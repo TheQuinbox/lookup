@@ -1,2 +1,2 @@
 wxpython
-yapsy
+yapsy==1.11.223

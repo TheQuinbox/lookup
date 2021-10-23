@@ -1,0 +1,9 @@
+[Core]
+Name = Urban Dictionary
+Module = ud
+
+[Documentation]
+Author = Quin Marilyn
+Version = 0.1
+Website = https://github.com/thequinbox/lookup
+Description = Allows looking up words with Urban Dictionary.
