@@ -29,7 +29,9 @@ class MainFrame(wx.Frame):
 			return
 
 	def on_list_change(self, event=None):
-		list(self.plugins)[self.list.GetSelection()].plugin_object.create_panel(self)
+		result = list(self.plugins)[self.list.GetSelection()].plugin_object.create_panel(self)
+		self.plugin_panel = None
+		self.plugin_panel = result
 
 	def on_exit(self, event=None):
 		self.Destroy()

@@ -12,7 +12,7 @@ class UrbanDictionaryPlugin(plugin_handler.Plugin):
 
 	def create_panel(self, frame):
 		panel = UrbanDictionaryPanel(frame)
-		frame.plugin_panel = panel
+		return panel
 
 	def on_search(self, event=None):
 		pass
