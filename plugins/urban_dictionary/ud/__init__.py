@@ -4,15 +4,11 @@ import wx
 
 class UrbanDictionaryPlugin(plugin_handler.Plugin):
 	def get_text(self):
-		final = ""
 		results = api.get_definition("Quin")
-		for i in results:
-			final += i.to_string()
-		return final
+		return "".join(i.to_string() for i in results)
 
 	def create_panel(self, frame):
-		panel = UrbanDictionaryPanel(frame)
-		return panel
+		return UrbanDictionaryPanel(frame)
 
 	def on_search(self, event=None):
 		pass
