@@ -9,5 +9,5 @@ class Plugin(IPlugin):
 		pass
 
 def get_plugin_manager():
-	manager = PluginManager(directories_list=["plugins", "plugin"], plugin_info_ext="lookup")
-	return manager
+	return PluginManager(
+	    directories_list=["plugins", "plugin"], plugin_info_ext="lookup")
